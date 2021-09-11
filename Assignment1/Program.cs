@@ -37,7 +37,7 @@ namespace Assignment1
 
         public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
         {
-            string pattern = @"[^\s]+";
+            string pattern = @"[a-zA-Z0-9][^\s]*";
             RegexOptions options = RegexOptions.Multiline;
             foreach (var line in lines)
             {
