@@ -51,5 +51,18 @@ namespace Assignment1.Tests
             Assert.Equal(new List<string>() { "hej", "med", "dig", "gik", "en", "tur", "mangler", "et", "gruppemedlem" }, output);
         }
 
+        [Fact]
+        public void Resolution_input_returns_touple()
+        {
+            List<(int, int)> test = new List<(int, int)> { (1920, 1080), (1024, 768), (800, 600), (640, 480), (320, 200), (320, 240), (800, 600), (1280, 960) };
+
+            var output = Program.resolution2(@"1920x1080
+1024x768, 800x600, 640x480
+320x200, 320x240, 800x600
+1280x960");
+
+            Assert.Equal(test, output);
+        }
+
     }
 }
