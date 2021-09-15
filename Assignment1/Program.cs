@@ -50,8 +50,6 @@ namespace Assignment1
 
         public static IEnumerable<(int width, int height)> Resolutions(IEnumerable<string> resolutions)
         {
-            List<(int, int)> list = new List<(int, int)>();
-
             Regex regex = new Regex(@"(?<first>[0-9][^\s,]*)x(?<second>[0-9][^\s,]*)", RegexOptions.IgnorePatternWhitespace);
             foreach (string test in resolutions)
             {
@@ -59,6 +57,13 @@ namespace Assignment1
                 {
                     yield return (Int32.Parse(ItemMatch.Groups["first"].Value), Int32.Parse(ItemMatch.Groups["second"].Value));
                 }
+            }
+        }
+        public static IEnumerable<string> InnerText(string html, string tag)
+        {
+            foreach (Match match in Regex.Matches(html, @"(?<=>)[\w\s<>\/(),.]+(?=<\/p)", RegexOptions.Multiline))
+            {
+                yield return Regex.Replace(match.Value, "<[^>]*>", "");
             }
         }
     }
