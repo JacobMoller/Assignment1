@@ -34,9 +34,11 @@ namespace Assignment1
         }
         public static IEnumerable<string> InnerText(string html, string tag)
         {
-            foreach (Match match in Regex.Matches(html, @"(?<=>)[\w\s<>\/(),.]+(?=<\/p)", RegexOptions.Multiline))
+            var test = Regex.Matches(html, @"(?:<(?<tag>" + tag + ".*?)>)(?<result>(.+))(?=</\\k<tag>)");
+
+            foreach (Match match in Regex.Matches(html, @"(?:<(?<tag>" + tag + ".*?)>)(?<result>(.+))(?=</\\k<tag>)"))
             {
-                yield return Regex.Replace(match.Value, "<[^>]*>", "");
+                yield return Regex.Replace(match.Groups["result"].Value, "<[^>]*>", "");
             }
         }
     }
